@@ -17,4 +17,5 @@ yay -S --needed python python-pip \
                 libmtp \
                 flatpak \
                 reflector reflector-simple \
-                ttf-liberation noto-fonts noto-fonts-emoji
+                ttf-liberation noto-fonts noto-fonts-emoji \
+                speedtest-cli
