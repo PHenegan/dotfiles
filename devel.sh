@@ -5,5 +5,6 @@ yay -S --needed intellij-idea-community-edition \ #intellij-idea-ultimate-editio
                 qtcreator \
                 git \
                 github-cli \
-                cmake
+                cmake \
+                godot-mono-bin
 pip3 install numpy selenium sympy
