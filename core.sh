@@ -5,7 +5,7 @@ makepkg -si
 cd ..
 
 # Will simplify installation so chromium doesn't need to be compiled
-yay -S electron-bin
+yay -S electron-bin electron12-bin
 yay -S --needed python python-pip \
                 jre11-openjdk jre8-openjdk jre-openjdk \
                 nano vim \
