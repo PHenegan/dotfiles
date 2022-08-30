@@ -5,7 +5,7 @@ makepkg -si
 cd ..
 
 yay -S --needed python python-pip \
-                openjdk-jre openjdk-jre11 openjdk-jre8 \
+                jre11-openjdk jre8-openjdk jre-openjdk \
                 nano vim \
                 firefox brave-bin \
                 discord \
