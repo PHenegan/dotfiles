@@ -7,5 +7,5 @@ yay -S --needed qtile qtile-extras-git \
                 xterm kitty \
                 nautilus thunar \
                 gedit \
-                bluman blueman-applet \
+                blueman \
                 network-manager-applet \
