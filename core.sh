@@ -15,7 +15,7 @@ yay -S --needed python python-pip \
                 teams \
                 neofetch \
                 htop \
-                balena-etcher \
+                popsicle-git \
                 libmtp \
                 flatpak \
                 reflector reflector-simple \
