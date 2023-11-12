@@ -1,4 +1,8 @@
+sudo timedatectl set-local-rtc 1
+
 pacman -S --needed git base-devel
+
+# Install 'yay' for AUR usage
 git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
