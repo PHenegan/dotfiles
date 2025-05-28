@@ -1,6 +1,6 @@
 # Module including SDDM, Plasma Desktop,
 # and some extra KDE utilities
-{ config, pkgs, unstable, ... }:
+{ config, pkgs, ... }:
 
 {
   services.desktopManager.plasma6.enable = true;

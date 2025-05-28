@@ -1,9 +1,9 @@
 # Communication/Messaging Apps 
-{ config, pkgs, unstable, ... }:
+{ config, pkgs, ... }:
 
 {
   environment.systemPackages = with pkgs; [
-    discord armcord
+    discord legcord
     slack
     teams-for-linux
     element-desktop

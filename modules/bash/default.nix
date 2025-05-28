@@ -1,6 +1,6 @@
 # Home-manager modules for Bash
 
-{ config, lib, pkgs, unstable, ...}:
+{ config, lib, pkgs, ...}:
 
 {
   programs.bash = {

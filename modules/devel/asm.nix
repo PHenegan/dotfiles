@@ -1,6 +1,6 @@
 # Utilities for Assembly development
 
-{ config, pkgs, unstable, ... }:
+{ config, pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
     mars-mips # MIPS Interpreter for CS 3650 

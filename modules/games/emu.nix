@@ -1,9 +1,9 @@
-{ config, pkgs, unstable, ... }:
+{ config, pkgs, ... }:
 
 {
   environment.systemPackages = with pkgs [
     # unstable.yuzu-mainline # F in the chat Yuzu, you will be missed
-    unstable.cemu
+    cemu
     dolphin-emu
   ];
 }

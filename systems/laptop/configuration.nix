@@ -2,7 +2,7 @@
 # your system.  Help is av sailable in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, lib, pkgs, unstable, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   # Include the results of the hardware scan.
@@ -15,11 +15,11 @@
     randomEncryption = true;
   } ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
+
   # boot.plymouth.enable = true;
 
   networking.hostName = "ninetales-alolan"; # Define your hostname.
@@ -30,7 +30,13 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
+  # NOTE - To get wifi passwords to save forever, you have to check the wifi setting to save
+  # "for all users" - that way it will work
   networking.networkmanager.enable = true;
+  networking.firewall.checkReversePath = false; # for WireGuard VPNs
+  # Wifi speeds can become faster when BBR is used instead of CUBIC for congestion control
+  boot.kernel.sysctl."net.core.default_qdisc" = "fq";
+  boot.kernel.sysctl."net.ipv4.tcp_congestion_control" = "bbr";
 
   # Enable bluetooth
   hardware.bluetooth.enable = true;
@@ -78,8 +84,7 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  sound.enable = true;
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -88,7 +93,6 @@
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
-
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
     #media-session.enable = true;
@@ -97,6 +101,15 @@
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
 
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+    substituters = ["https://hyprland.cachix.org"];
+    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+  };
+
+  # Allows running regular linux binaries (needed for neovim plugins)
+  programs.nix-ld.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.phenegan = {
     isNormalUser = true;
@@ -104,27 +117,30 @@
     extraGroups = [ "networkmanager" "wheel" "input" ];
     packages = with pkgs; [
       firefox
-      vmware-horizon-client
-      globalprotect-openconnect
     #  thunderbird
     ];
   };
 
-  # Replace some services with versions from the unstable channel
-  nixpkgs.config.packageOverrides = super : let self = super.pkgs; in {
-    power-profiles-daemon = unstable.power-profiles-daemon;
-    supergfxctl = unstable.supergfxctl;
-    asusctl = unstable.asusctl;
-  };
+  security.polkit.enable = true;
  
   # Asus 
-  # services.supergfxd.enable = true;
-  # services.supergfxd.settings = /home/phenegan/.dotfiles/systems/laptop/supergfxd.conf;
+  services.supergfxd = {
+    enable = true;
+    settings = {
+      mode = "Integrated";
+      vfio_enable = false;
+      vfio_save = false;
+      always_reboot = false;
+      no_logind = false;
+      logout_timeout_s = 180;
+      hotplug_type = "None";
+    };
+  };
 
-  # services.asusd = {
-  #   enable = true;
-  #   enableUserService = true;
-  # };
+  services.asusd = {
+    enable = true;
+    enableUserService = true;
+  };
 
   services.power-profiles-daemon.enable = true;
 
@@ -138,6 +154,7 @@
   nixpkgs.config.permittedInsecurePackages = [
     "electron-25.9.0"
   ];
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget - this is a lie lmao
   environment.systemPackages = with pkgs; [

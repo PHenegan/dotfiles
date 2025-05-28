@@ -2,9 +2,9 @@
   description = "Flake for system state";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-24.05";
-    unstablePkgs.url = "nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager/release-24.05";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
+    zen-browser.url = "github:0xc000022070/zen-browser-flake";
+    home-manager.url = "github:nix-community/home-manager/release-24.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -13,31 +13,32 @@
       lib = nixpkgs.lib;
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
-      unstable = import inputs.unstablePkgs {
-        system = "${system}";
-	      config.allowUnfree = true;
-      };
+      # stable = import inputs.stablePkgs {
+      #   system = "${system}";
+      #   config.allowUnfree = true;
+      # };
+      zen-browser = inputs.zen-browser.packages.${system};
     in {
       nixosConfigurations = {
         ninetales-alolan = lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit unstable; };
+          specialArgs = { inherit zen-browser; };
           modules = [
             ./modules/games
             ./modules/communication
             ./modules/devel
-	          ./modules/desktop/hyprland.nix
-	          ./modules/desktop/plasma.nix
-	          ./modules/utilities
-	          ./modules/utilities/neovim.nix
-	          ./systems/laptop/configuration.nix
-	        ];
+            ./modules/desktop/hyprland.nix
+            ./modules/utilities
+            ./modules/utilities/neovim.nix
+            ./modules/utilities/pipewire.nix
+            ./systems/laptop/configuration.nix
+          ];
         };
       };
       homeConfigurations = {
         phenegan = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          extraSpecialArgs = {inherit unstable; };
+          # extraSpecialArgs = {inherit unstable; };
           modules = [
             ./home.nix
           ];
