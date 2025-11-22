@@ -24,6 +24,7 @@
           inherit system;
           specialArgs = { inherit zen-browser; };
           modules = [
+            ./systems/laptop/configuration.nix
             ./modules/games
             ./modules/communication
             ./modules/devel
@@ -31,9 +32,21 @@
             ./modules/utilities
             ./modules/utilities/neovim.nix
             ./modules/utilities/pipewire.nix
-            ./systems/laptop/configuration.nix
           ];
         };
+	nixos-vm = lib.nixosSystem {
+	  inherit system;
+	  specialArgs = { inherit zen-browser; };
+	  modules = [
+            ./systems/vm/configuration.nix
+            ./modules/communication
+            ./modules/desktop/hyprland.nix
+	    ./modules/gnome.nix
+            ./modules/utilities
+            ./modules/utilities/neovim.nix
+            ./modules/utilities/pipewire.nix
+	  ];
+	};
       };
       homeConfigurations = {
         phenegan = home-manager.lib.homeManagerConfiguration {
