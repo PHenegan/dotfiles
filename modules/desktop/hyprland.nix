@@ -9,7 +9,7 @@
 {
   services.displayManager.sddm = {
     enable = true;
-    theme = "catppuccin-macchiato";
+    theme = "catppuccin-macchiato-lavender";
     package = pkgs.kdePackages.sddm;
   };
   programs.hyprland = {
@@ -20,6 +20,7 @@
   fonts.packages = with pkgs; [
     noto-fonts
     font-awesome
+    nerd-fonts.jetbrains-mono
   ];
 
   services.gvfs.enable = true;
@@ -39,7 +40,7 @@
     qt6.qtwayland
     hyprpaper
     waybar
-    rofi-wayland
+    rofi
     grim
 
     # Tools / App Defaults
@@ -69,6 +70,7 @@
     kdePackages.breeze-icons
     (catppuccin-sddm.override {
       flavor = "macchiato";
+      accent = "lavender";
       font = "Noto Sans Light";
       fontSize = "18";
     })

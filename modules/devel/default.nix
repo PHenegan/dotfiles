@@ -25,7 +25,6 @@
     nodejs corepack
     yarn bun
     jdk jdk8 jdk11 jdk17
-    jetbrains.rust-rover
     vscode
   ];
 }

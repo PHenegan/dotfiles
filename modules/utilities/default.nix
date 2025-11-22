@@ -30,7 +30,7 @@
     obsidian
     xournalpp
     popsicle
-    protonvpn-gui
+    # protonvpn-gui Temporarily disabled while package is broken
     
     # Media
     vivaldi
@@ -41,9 +41,9 @@
     vlc
     helvum 
     easyeffects
-    stremio
+    # stremio
     obs-studio # TODO - maybe put this in a separate file
-    gimp
+    gimp3
     # with like GIMP, Krita, and audacity or something
 
     # android
