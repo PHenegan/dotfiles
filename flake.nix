@@ -41,7 +41,7 @@
             ./systems/vm/configuration.nix
             ./modules/communication
             ./modules/desktop/hyprland.nix
-	    ./modules/gnome.nix
+	    ./modules/desktop/gnome.nix
             ./modules/utilities
             ./modules/utilities/neovim.nix
             ./modules/utilities/pipewire.nix
@@ -49,7 +49,7 @@
 	};
       };
       homeConfigurations = {
-        phenegan = home-manager.lib.homeManagerConfiguration {
+        ph = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           # extraSpecialArgs = {inherit unstable; };
           modules = [
