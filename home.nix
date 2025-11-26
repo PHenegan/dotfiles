@@ -9,6 +9,7 @@
   imports = [
     ./home/bash
     ./home/hyprland.nix
+    ./home/kitty.nix
   ];
 
   # This value determines the Home Manager release that your configuration is
