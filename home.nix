@@ -7,9 +7,9 @@
   home.homeDirectory = "/home/phenegan";
 
   imports = [
-    ./home/bash
-    ./home/hyprland.nix
-    ./home/kitty.nix
+    ./shared/home/bash
+    ./shared/home/hyprland.nix
+    ./shared/home/kitty.nix
   ];
 
   # This value determines the Home Manager release that your configuration is
