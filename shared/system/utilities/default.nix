@@ -30,8 +30,10 @@
     obsidian
     xournalpp
     popsicle
-    # protonvpn-gui Temporarily disabled while package is broken
-    
+    protonvpn-gui
+    gparted
+    exfat
+
     # Media
     vivaldi
     vivaldi-ffmpeg-codecs
