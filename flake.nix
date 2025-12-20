@@ -20,22 +20,24 @@
       zen-browser = inputs.zen-browser.packages.${system};
     in {
       nixosConfigurations = {
+        # NOTE: Change this to the name for your system
         ninetales-alolan = lib.nixosSystem {
           inherit system;
           specialArgs = { inherit zen-browser; };
           modules = [
-            ./modules/games
-            ./modules/communication
-            ./modules/devel
-            ./modules/desktop/hyprland.nix
-            ./modules/utilities
-            ./modules/utilities/neovim.nix
-            ./modules/utilities/pipewire.nix
-            ./systems/laptop/configuration.nix
+            ./shared/system/games
+            ./shared/system/communication
+            ./shared/system/devel
+            ./shared/system/desktop/hyprland.nix
+            ./shared/system/utilities
+            ./shared/system/utilities/neovim.nix
+            ./shared/system/utilities/pipewire.nix
+            ./configuration.nix
           ];
         };
       };
       homeConfigurations = {
+        # NOTE: If you're someone else using this, change the username here
         phenegan = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           # extraSpecialArgs = {inherit unstable; };
