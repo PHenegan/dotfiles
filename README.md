@@ -22,8 +22,10 @@ Most of the files under `config/` are being 1-to-1 mapped to the `~/.config/` di
 and dependencies on your distro.
 
 ## Avoiding Merge Conflicts
-I can't guarantee anything in the `shared` folder won't have merge conflicts. For modifications the `config` folder, you can make a new nix module overriding the original file, and use Nix's priority system to give your file a higher priority than the one in the `config` folder. You can also just copy the files, make modifications, and use a new nix module mapping them instead of the original.
-- An example of this is in `config/hypr`, where I created a file designed to be overriden without having to clone and modify the entire thing.
+(Only applies to Nix/home-manager systems)
+
+I can't guarantee anything in the `shared` and `config` folders won't have merge conflicts. For modifications the `config` folder, you can make a new nix module overriding the original file, and use Nix's priority system to give your file a higher priority than the one in the `config` folder. You can also just copy the files, make modifications, and use a new nix module mapping them instead of the original.
+- An example of this is in `config/hypr`, where I created a file designed to be overriden without having to copy/modify the entire thing.
 
 
 ## Image Sources
