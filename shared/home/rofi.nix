@@ -2,7 +2,7 @@
 { config, lib, pkgs, ... }:
 {
   home.file.".config/rofi" = {
-    source = ../config/rofi;
+    source = ../../config/rofi;
     recursive = true;
   };
 }
