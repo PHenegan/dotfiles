@@ -1,5 +1,8 @@
 # Modules for hyprland desktop and some general programs I use for it
 
+# DEPRECATION NOTE
+# I'm not maintaining this, screw transphobes
+
 # NOTE ON THEMES
 # - Some of the catppuccin themes need to be manually installed - i.e. kvantum and qt5/6 schemes
 # - if GTK breaks try messing with dconf since that is the most manual way to do it

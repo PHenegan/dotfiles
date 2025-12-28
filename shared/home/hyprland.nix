@@ -2,7 +2,7 @@
 {
   # Hyprland config also depends on waybar and rofi
 
-  imports = [./waybar.nix ./rofi.nix];
+  imports = [./rofi.nix];
   home.file.".config/hypr" = {
     source = ../../config/hypr;
     recursive = true;
@@ -12,5 +12,11 @@
     source = ../../config/hypr/scripts;
     recursive = true;
     executable = true;
+  };
+
+  # Use hyprland-specific waybar folder
+  home.file.".config/waybar" = {
+    source = ../../config/waybar.hyprland;
+    recursive = true;
   };
 }
