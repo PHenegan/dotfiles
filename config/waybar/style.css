@@ -116,7 +116,7 @@ window#waybar.hidden {
   margin-left: 5px;
   font-size: 15px;
   border-radius: 8px 0px 0px 8px;
-  background-image: url("/home/phenegan/.dotfiles/assets/ninetales-alolan-sprite.png");
+  background-image: url("/home/phenegan/.dotfiles/assets/bar-icon.png");
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
