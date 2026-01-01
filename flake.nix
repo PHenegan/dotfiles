@@ -12,6 +12,8 @@
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
+      # see how pkgs is setup in this post to avoid legacy usage 
+      # https://discourse.nixos.org/t/home-manager-flake-and-configuration-how-to-rebuild-the-whole-environment-with-just-nixos-rebuild-switch/38767
       pkgs = nixpkgs.legacyPackages.${system};
       # stable = import inputs.stablePkgs {
       #   system = "${system}";
