@@ -46,7 +46,7 @@
           # extraSpecialArgs = {inherit unstable; };
           modules = [
             ./home.nix
-            ./shared/home/bash.nix
+            ./shared/home/bash
             ./shared/home/hyprland.nix
             ./shared/home/kitty.nix
           ];
