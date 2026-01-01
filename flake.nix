@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
+    zen-browser.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
@@ -45,6 +46,9 @@
           # extraSpecialArgs = {inherit unstable; };
           modules = [
             ./home.nix
+            ./shared/home/bash.nix
+            ./shared/home/hyprland.nix
+            ./shared/home/kitty.nix
           ];
         };
       };
