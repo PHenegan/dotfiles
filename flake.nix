@@ -31,7 +31,7 @@
             ./shared/system/games
             ./shared/system/communication
             ./shared/system/devel
-            ./shared/system/desktop/hyprland.nix
+            ./shared/system/desktop/niri.nix
             ./shared/system/utilities
             ./shared/system/utilities/neovim.nix
             ./shared/system/utilities/pipewire.nix
