@@ -47,7 +47,7 @@
           modules = [
             ./home.nix
             ./shared/home/bash
-            ./shared/home/hyprland.nix
+            ./shared/home/niri.nix
             ./shared/home/kitty.nix
           ];
         };
