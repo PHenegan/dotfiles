@@ -50,6 +50,6 @@
 
     # android
     android-tools
-    mtpfs
+    jmtpfs
   ];
 }
