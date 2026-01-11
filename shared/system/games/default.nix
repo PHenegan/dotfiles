@@ -7,5 +7,7 @@
   environment.systemPackages = with pkgs; [
     heroic
     prismlauncher
+    olympus
+    r2modman
   ];
 }
