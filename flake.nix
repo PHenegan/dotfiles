@@ -7,6 +7,8 @@
     zen-browser.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    niri-workspace-switcher.url = "github:PHenegan/niri-workspace-switcher";
+    niri-workspace-switcher.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, home-manager, ... } @ inputs:
@@ -19,12 +21,13 @@
       #   config.allowUnfree = true;
       # };
       zen-browser = inputs.zen-browser.packages.${system};
+      niri-workspace-switcher = inputs.niri-workspace-switcher.packages.${system};
     in {
       nixosConfigurations = {
         # NOTE: Change this to the name for your system
         ninetales-alolan = lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit zen-browser; };
+          specialArgs = { inherit zen-browser niri-workspace-switcher; };
           modules = [
             ./shared/system/games
             ./shared/system/communication
