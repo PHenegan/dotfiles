@@ -13,8 +13,6 @@
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
-      # see how pkgs is setup in this post to avoid legacy usage 
-      # https://discourse.nixos.org/t/home-manager-flake-and-configuration-how-to-rebuild-the-whole-environment-with-just-nixos-rebuild-switch/38767
       pkgs = nixpkgs.legacyPackages.${system};
       # stable = import inputs.stablePkgs {
       #   system = "${system}";
@@ -31,7 +29,7 @@
             ./shared/system/games
             ./shared/system/communication
             ./shared/system/devel
-            ./shared/system/desktop/hyprland.nix
+            ./shared/system/desktop/niri.nix
             ./shared/system/utilities
             ./shared/system/utilities/neovim.nix
             ./shared/system/utilities/pipewire.nix
@@ -47,7 +45,7 @@
           modules = [
             ./home.nix
             ./shared/home/bash
-            ./shared/home/hyprland.nix
+            ./shared/home/niri.nix
             ./shared/home/kitty.nix
           ];
         };

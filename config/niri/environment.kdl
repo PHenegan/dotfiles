@@ -1,0 +1,22 @@
+environment {
+    XDG_SESSION_TYPE "wayland"
+    SDL_VIDEODRIVER "wayland"
+    QT_QPA_PLATFORM "wayland"
+    QT_QPA_PLATFORMTHEME "qt6ct"
+    NIXOS_OZONE_WL "1"
+}
+
+// Add lines like this to spawn processes at startup.
+// Note that running niri as a session supports xdg-desktop-autostart,
+// which may be more convenient to use.
+// See the binds section below for more spawn examples.
+// To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
+spawn-sh-at-startup "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+spawn-sh-at-startup "systemctl --user start plasma-polkit-agent"
+spawn-sh-at-startup "~/.config/niri/scripts/wallpaper.sh"
+spawn-sh-at-startup "swayidle -w timeout 300 \"niri msg action power-off-monitors\" timeout 360 \"swaylock -f\" before-sleep \"swaylock -f\""
+spawn-at-startup "waybar"
+spawn-at-startup "nm-applet"
+spawn-at-startup "blueman"
+spawn-sh-at-startup "legcord --enable-features=UseOzonePlatform --ozone-platform=wayland"
+// spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
