@@ -7,7 +7,6 @@
     slack
     teams-for-linux
     element-desktop
-    beeper
     zoom-us
   ];
 }
