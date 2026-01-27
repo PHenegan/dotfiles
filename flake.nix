@@ -25,18 +25,11 @@
     in {
       nixosConfigurations = {
         # NOTE: Change this to the name for your system
-        ninetales-alolan = lib.nixosSystem {
+        mimikyu = lib.nixosSystem {
           inherit system;
           specialArgs = { inherit zen-browser niri-workspace-switcher; };
           modules = [
-            ./shared/system/games
-            ./shared/system/communication
-            ./shared/system/devel
-            ./shared/system/desktop/niri.nix
-            ./shared/system/utilities
-            ./shared/system/utilities/neovim.nix
-            ./shared/system/utilities/pipewire.nix
-            ./configuration.nix
+            ./devices/mimikyu/configuration.nix
           ];
         };
       };
@@ -46,10 +39,7 @@
           inherit pkgs;
           # extraSpecialArgs = {inherit unstable; };
           modules = [
-            ./home.nix
-            ./shared/home/bash
-            ./shared/home/niri.nix
-            ./shared/home/kitty.nix
+            ./devices/mimikyu/home.nix
           ];
         };
       };
