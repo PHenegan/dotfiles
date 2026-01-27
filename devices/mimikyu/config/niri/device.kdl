@@ -1,5 +1,11 @@
 // TODO: Add your necessary device setup into this file
 // (e.g. monitor setup or device-specific keybinds)
+output "eDP-1" {
+    mode "2560x1440@60"
+    scale 2.5
+    transform "normal"
+    position x=0 y=0
+}
 
 // Input device configuration.
 // Find the full list of options on the wiki:

@@ -13,5 +13,5 @@
 
   home.file.".config/niri/device.kdl" = {
     source = ./config/niri/device.kdl;
-  }
+  };
 }

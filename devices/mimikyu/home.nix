@@ -55,6 +55,8 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+
+    "Pictures/Wallpapers/rainbow-cat.png".source = ../../assets/rainbow-cat.png;
   };
 
   # Home Manager can also manage your environment variables through
