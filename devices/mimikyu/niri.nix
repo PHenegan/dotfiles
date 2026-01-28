@@ -11,6 +11,10 @@
     '';
   };
 
+  home.file."Pictures/icons/bar-icon.png" = {
+    source = ../../assets/icons/mimikyu.png;
+  };
+
   home.file.".config/niri/device.kdl" = {
     source = ./config/niri/device.kdl;
   };
