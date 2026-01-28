@@ -14,34 +14,32 @@
   outputs = { self, nixpkgs, home-manager, ... } @ inputs:
     let
       lib = nixpkgs.lib;
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-      # stable = import inputs.stablePkgs {
-      #   system = "${system}";
-      #   config.allowUnfree = true;
-      # };
-      zen-browser = inputs.zen-browser.packages.${system};
-      niri-workspace-switcher = inputs.niri-workspace-switcher.packages.${system};
+      machines = {
+        mimikyu = {
+          # Dell XPS 15 9560 - wishes it was a thinkpad
+          system = "x86_64-linux";
+          systemFile = ./devices/mimikyu/configuration.nix;
+          homeFile = ./devices/mimikyu/home.nix;
+        };
+      };
     in {
-      nixosConfigurations = {
-        # NOTE: Change this to the name for your system
-        mimikyu = lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit zen-browser niri-workspace-switcher; };
-          modules = [
-            ./devices/mimikyu/configuration.nix
-          ];
-        };
-      };
-      homeConfigurations = {
-        # NOTE: If you're someone else using this, change the username here
-        phenegan = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          # extraSpecialArgs = {inherit unstable; };
-          modules = [
-            ./devices/mimikyu/home.nix
-          ];
-        };
-      };
+      nixosConfigurations = builtins.mapAttrs (
+        _: machine:
+        lib.nixosSystem {
+          specialArgs = {
+            zen-browser = inputs.zen-browser.packages.${machine.system};
+            niri-workspace-switcher = inputs.niri-workspace-switcher.packages.${machine.system};
+          };
+          modules = [ machine.systemFile ];
+        }
+      ) machines;
+
+      homeConfigurations = builtins.mapAttrs (
+        _: machine:
+        lib.nixosSystem {
+          pkgs = nixpkgs.legacyPackages.${machine.system};
+          modules = [ machine.homeFile ];
+        }
+      ) machines;
     };
 }
