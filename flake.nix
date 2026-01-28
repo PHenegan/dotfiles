@@ -30,15 +30,19 @@
             zen-browser = inputs.zen-browser.packages.${machine.system};
             niri-workspace-switcher = inputs.niri-workspace-switcher.packages.${machine.system};
           };
-          modules = [ machine.systemFile ];
-        }
-      ) machines;
-
-      homeConfigurations = builtins.mapAttrs (
-        _: machine:
-        lib.nixosSystem {
-          pkgs = nixpkgs.legacyPackages.${machine.system};
-          modules = [ machine.homeFile ];
+          modules = [ 
+            machine.systemFile
+            # NOTE:
+            # Honestly I'd rather have home-manager be a standalone installation
+            # but I couldn't think of a way to make the configurations apply per-machine
+            # while having the same username
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.phenegan = machine.homeFile;
+            }
+          ];
         }
       ) machines;
     };
