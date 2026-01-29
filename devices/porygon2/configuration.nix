@@ -8,6 +8,14 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ../../shared/system/communication
+      ../../shared/system/desktop/niri.nix
+      ../../shared/system/devel
+      ../../shared/system/games
+      ../../shared/system/games/emu.nix
+      ../../shared/system/utilities
+      ../../shared/system/utilities/neovim.nix
+      ../../shared/system/utilities/pipewire.nix
     ];
 
   # Bootloader.
