@@ -9,49 +9,43 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     niri-workspace-switcher.url = "github:PHenegan/niri-workspace-switcher";
     niri-workspace-switcher.inputs.nixpkgs.follows = "nixpkgs";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
   outputs = { self, nixpkgs, home-manager, ... } @ inputs:
     let
       lib = nixpkgs.lib;
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-      # stable = import inputs.stablePkgs {
-      #   system = "${system}";
-      #   config.allowUnfree = true;
-      # };
-      zen-browser = inputs.zen-browser.packages.${system};
-      niri-workspace-switcher = inputs.niri-workspace-switcher.packages.${system};
+      machines = {
+        mimikyu = {
+          # Dell XPS 15 9560 - wishes it was a thinkpad
+          system = "x86_64-linux";
+          systemFile = ./devices/mimikyu/configuration.nix;
+          homeFile = ./devices/mimikyu/home.nix;
+          systemModules = [ inputs.nixos-hardware.nixosModules.dell-xps-15-9560 ];
+        };
+      };
     in {
-      nixosConfigurations = {
-        # NOTE: Change this to the name for your system
-        ninetales-alolan = lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit zen-browser niri-workspace-switcher; };
-          modules = [
-            ./shared/system/games
-            ./shared/system/communication
-            ./shared/system/devel
-            ./shared/system/desktop/niri.nix
-            ./shared/system/utilities
-            ./shared/system/utilities/neovim.nix
-            ./shared/system/utilities/pipewire.nix
-            ./configuration.nix
+      nixosConfigurations = builtins.mapAttrs (
+        _: machine:
+        lib.nixosSystem {
+          specialArgs = {
+            zen-browser = inputs.zen-browser.packages.${machine.system};
+            niri-workspace-switcher = inputs.niri-workspace-switcher.packages.${machine.system};
+          };
+          modules = [ 
+            machine.systemFile
+            # NOTE:
+            # Honestly I'd rather have home-manager be a standalone installation
+            # but I couldn't think of a way to make the configurations apply per-machine
+            # while having the same username
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.phenegan = machine.homeFile;
+            }
           ];
-        };
-      };
-      homeConfigurations = {
-        # NOTE: If you're someone else using this, change the username here
-        phenegan = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          # extraSpecialArgs = {inherit unstable; };
-          modules = [
-            ./home.nix
-            ./shared/home/bash
-            ./shared/home/niri.nix
-            ./shared/home/kitty.nix
-          ];
-        };
-      };
+        }
+      ) machines;
     };
 }
