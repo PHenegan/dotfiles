@@ -19,28 +19,24 @@
         mimikyu = {
           # Dell XPS 15 9560 - wishes it was a thinkpad
           system = "x86_64-linux";
-          systemFile = ./devices/mimikyu/configuration.nix;
-          homeFile = ./devices/mimikyu/home.nix;
           systemModules = [ inputs.nixos-hardware.nixosModules.dell-xps-15-9560 ];
         };
         porygon2 = {
           # Desktop
           system = "x86_64-linux";
-          systemFile = ./devices/porygon2/configuration.nix;
-          homeFile = ./devices/porygon2/home.nix;
           systemModules = [];
         };
       };
     in {
       nixosConfigurations = builtins.mapAttrs (
-        _: machine:
+        hostname: machine:
         lib.nixosSystem {
           specialArgs = {
             zen-browser = inputs.zen-browser.packages.${machine.system};
             niri-workspace-switcher = inputs.niri-workspace-switcher.packages.${machine.system};
           };
           modules = [ 
-            machine.systemFile
+            ./devices/${hostname}/configuration.nix
             # NOTE:
             # Honestly I'd rather have home-manager be a standalone installation
             # but I couldn't think of a way to make the configurations apply per-machine
@@ -49,9 +45,9 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.phenegan = machine.homeFile;
+              home-manager.users.phenegan = ./devices/${hostname}/home.nix;
             }
-          ];
+          ] ++ machine.systemModules;
         }
       ) machines;
     };
