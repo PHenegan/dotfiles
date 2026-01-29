@@ -32,6 +32,12 @@
           user = "phenegan";
           systemModules = [];
         };
+        porygon2 = {
+          # Desktop - the stable one
+          system = "x86_64-linux";
+          user = "phenegan";
+          systemModules = [];
+        };
       };
     in {
       nixosConfigurations = builtins.mapAttrs (
