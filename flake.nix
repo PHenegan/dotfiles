@@ -23,6 +23,13 @@
           homeFile = ./devices/mimikyu/home.nix;
           systemModules = [ inputs.nixos-hardware.nixosModules.dell-xps-15-9560 ];
         };
+        porygon2 = {
+          # Desktop
+          system = "x86_64-linux";
+          systemFile = ./devices/porygon2/configuration.nix;
+          homeFile = ./devices/porygon2/home.nix;
+          systemModules = [];
+        };
       };
     in {
       nixosConfigurations = builtins.mapAttrs (
