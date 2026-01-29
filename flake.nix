@@ -9,6 +9,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     niri-workspace-switcher.url = "github:PHenegan/niri-workspace-switcher";
     niri-workspace-switcher.inputs.nixpkgs.follows = "nixpkgs";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
   outputs = { self, nixpkgs, home-manager, ... } @ inputs:
@@ -20,6 +21,7 @@
           system = "x86_64-linux";
           systemFile = ./devices/mimikyu/configuration.nix;
           homeFile = ./devices/mimikyu/home.nix;
+          systemModules = [ inputs.nixos-hardware.nixosModules.dell-xps-15-9560 ];
         };
       };
     in {
