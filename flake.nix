@@ -3,12 +3,16 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
+
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     zen-browser.inputs.nixpkgs.follows = "nixpkgs";
+
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
     niri-workspace-switcher.url = "github:PHenegan/niri-workspace-switcher";
     niri-workspace-switcher.inputs.nixpkgs.follows = "nixpkgs";
+
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
