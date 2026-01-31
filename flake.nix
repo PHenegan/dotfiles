@@ -23,6 +23,7 @@
           systemModules = [ inputs.nixos-hardware.nixosModules.dell-xps-15-9560 ];
         };
         ninetales-alolan = {
+          # 2021 Asus ROG Flow X13 - glass cannon
           system = "x86_64-linux";
           user = "phenegan";
           systemModules = [];

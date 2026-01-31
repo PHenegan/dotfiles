@@ -8,7 +8,7 @@
   # Include the results of the hardware scan.
   imports = [
     ./hardware-configuration.nix
-    ./shared/system/utilities/work.nix
+    ../../shared/system/utilities/work.nix
     ../../shared/system/communication
     ../../shared/system/devel
     ../../shared/system/desktop/niri.nix
