@@ -21,6 +21,13 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Disable Nvidia GPU
+  boot.extraModprobeConfig = ''
+    blacklist nouveau
+    options nouveau modeset=0
+  '';
+
+
   boot.plymouth = {
     enable = true;
     themePackages = with pkgs; [ plymouth-blahaj-theme ];
@@ -51,6 +58,30 @@
   programs.nix-ld.enable = true;
   programs.direnv.enable = true;
 
+  # # Nvidia drivers
+  # # Using a laptop 1050 - it doesn't appear to be on the legacy page
+  # services.xserver.videoDrivers = [
+  #   "modesetting"
+  #   "nvidia"
+  # ];
+  # hardware.nvidia = {
+  #   modesetting.enable = true;
+  #   nvidiaSettings = true;
+  #   open = false;
+  #   package = config.boot.kernelPackages.nvidiaPackages.stable;
+  #   powerManagement.enable = false;
+  #   powerManagement.finegrained = false;
+  #   prime = {
+  #     sync.enable = true;
+  #     nvidiaBusId = "PCI:1:0:0";
+  #     intelBusId = "PCI:0:2:0";
+  #   };
+  # };
+  #
+  # hardware.graphics.enable = true;
+  # hardware.graphics.enable32Bit = true;
+  # hardware.opengl.driSupport32Bit = true;
+  #
   # Laptop Power Management
   services.power-profiles-daemon.enable = true;
 

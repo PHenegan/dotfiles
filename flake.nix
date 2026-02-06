@@ -24,7 +24,7 @@
           # Dell XPS 15 9560 - wishes it was a thinkpad
           system = "x86_64-linux";
           user = "phenegan";
-          systemModules = [ inputs.nixos-hardware.nixosModules.dell-xps-15-9560 ];
+          systemModules = [];
         };
         ninetales-alolan = {
           # 2021 Asus ROG Flow X13 - glass cannon
@@ -53,7 +53,7 @@
               home-manager.useUserPackages = true;
               home-manager.users.${machine.user} = ./devices/${hostname}/home.nix;
             }
-          ];
+          ] ++ machine.systemModules;
         }
       ) machines;
     };
