@@ -78,12 +78,12 @@
   #   };
   # };
   #
-  # hardware.graphics.enable = true;
-  # hardware.graphics.enable32Bit = true;
-  # hardware.opengl.driSupport32Bit = true;
-  #
+  hardware.graphics.enable = true;
+  hardware.graphics.enable32Bit = true;
+
   # Laptop Power Management
   services.power-profiles-daemon.enable = true;
+  services.thermald.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/New_York";
