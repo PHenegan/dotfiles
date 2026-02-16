@@ -3,7 +3,7 @@
 {
   environment.systemPackages = with pkgs; [
     mgba
-    melonDS
+    melonds
     azahar
     # citra-canary # F in the chat citra, you will be missed
   ];
