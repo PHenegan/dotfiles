@@ -11,10 +11,11 @@ This is the template for the nix flakes which I use on my personal devices
 3. Make a folder for your device. I put mine under ./devices/[hostname] but technically they can go anywhere under the project.
 4. Copy the contents of `/etc/nixos/hardware-configuration.nix` and `/etc/nixos/configuration.nix` and put them in your device's folder.
 Make sure to adjust `configuration.nix` to import any desired nix files and remove conflicting configurations (packages, desktop manager, etc.)
-5. Make a `home.nix` folder in the same location as your `configuration.nix` and `hardware-configuration.nix`.
+5. Make a `home.nix` file in the same location as your `configuration.nix` and `hardware-configuration.nix`.
+   Paste a home-manager template into this nix file, which can be found on the home-manager documentation page.
 6. Add the filepaths and any necessary hardware modules in `flake.nix` under the `machines` value, following the structure of existing examples.
 The property names represent the hostname of the device you wish to configure
-7. `sudo nixos-rebuild switch --flake ~/dotfiles/#[hostname]`
+7. `sudo nixos-rebuild switch --flake ~/.dotfiles/#[hostname]`
 
 ### Post Installation
 You should now have a functional system, and can add any device-specific settings under nix files inside your `devices` folder.
