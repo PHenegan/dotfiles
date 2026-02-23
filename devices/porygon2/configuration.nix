@@ -5,18 +5,24 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ../../shared/system/communication
-      ../../shared/system/desktop/niri.nix
-      ../../shared/system/devel
-      ../../shared/system/games
-      ../../shared/system/games/emu.nix
-      ../../shared/system/utilities
-      ../../shared/system/utilities/neovim.nix
-      ../../shared/system/utilities/pipewire.nix
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ../../shared/system/communication
+    ../../shared/system/desktop/niri.nix
+    ../../shared/system/devel
+    ../../shared/system/games
+    ../../shared/system/games/emu.nix
+    ../../shared/system/utilities
+    ../../shared/system/utilities/neovim.nix
+    ../../shared/system/utilities/pipewire.nix
+  ];
+
+  # Create a swapfile
+  swapDevices = [ {
+    device = "/var/lib/swapfile";
+    size = 24 * 1024; # size in Mib
+    randomEncryption = true;
+  } ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
